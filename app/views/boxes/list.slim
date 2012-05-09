@@ -1,0 +1,9 @@
+.boxes
+  - @boxes.each_slice(3) do |group|  
+    .row.box_row     
+      - group.each do |box|    
+        .span4
+          h2== box.title
+          p.desc== box.short_desc
+          p
+            a.btn href==url_for(:boxes, :buy, :slug => box.slug) "Buy"

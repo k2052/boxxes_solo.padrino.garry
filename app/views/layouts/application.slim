@@ -1,0 +1,19 @@
+doctype 5
+html lang="en" 
+  head
+    meta charset="UTF-8"
+    title Boxxes Solo
+    == css :app
+    == js :app
+  body
+    .navbar
+      .navbar-inner
+        .container
+          a.brand href==url(:boxes, :index) Boxxes Solo
+          ul.nav== partial "shared/nav"
+    .main.container
+      .row
+        .span6.columns
+          - if flash[:notice]
+            #notice.alert-message.block-message.success== flash[:notice]
+      == yield

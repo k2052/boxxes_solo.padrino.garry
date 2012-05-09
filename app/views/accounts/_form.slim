@@ -1,0 +1,62 @@
+- if @account.errors.any?
+  .alert-message.block-message.error
+    p #{pluralize(account.errors.count, "problem")} with your registration:
+    .errors
+      - @account.errors.full_messages.each do |msg|
+        p== msg
+
+.clearfix
+  ==f.label :name
+  .input
+    == f.text_field :name, :class => "field"
+
+.clearfix
+  == f.label :email
+  .input
+    == f.text_field :email, :class => "field"
+
+.clearfix
+  == f.label :password
+  .input
+    == f.password_field :password, :class => "field"
+    - if defined? editing
+      span.help-block Leave blank to keep your current password
+
+.clearfix
+  == f.label :password_confirmation
+  .input
+    == f.password_field :password_confirmation, :class => "field" 
+  
+- if @account.last_4_digits
+  #change-card.clearfix
+    label Card
+    .input
+      span=="Using card ending with #{@account.last_4_digits}"  
+    a href="#" (change)  
+    
+noscript
+  p This form requires Javascript to use  
+  
+#credit-card style==(@account.last_4_digits ? "display:none" : "display:block")
+  #credit-card-errors style="display:none"
+    #stripe-error-message.alert-message.block-message.error
+
+  .clearfix
+    == f.label :credit_card_number
+    .input
+      == f.text_field :credit_card_number, :value => params[:credit_card_number], :class => "field", :disabled => true
+
+  .clearfix
+    == f.label :cvv, :text => "Security code (CVV)"
+    .input
+      == f.text_field :cvv, :value => params[:cvv], :class => "small", :disabled => true
+
+  .clearfix
+    == f.label :expiry_date
+    .input
+      == f.text_field :expiry_date, :type => "datetime-local"
+
+  span.note Your credit card details will be sent directly to our payment processor     
+
+.actions
+  == f.submit((submit_label ? submit_label : "Submit"), :class => "btn primary")   

@@ -1,0 +1,15 @@
+div.pagination 
+  ul
+    - if @boxes.prev?
+      li.prev
+        a href==url(:boxes, :list, :page => @boxes.prev.number) "←" 
+    - @boxes.number_of_pages.times do |i|
+      - if i == @pagenum
+        li.active 
+          a href="#"==i
+      - else 
+        li
+          a href==url(:boxes, :list, :page => i)==i 
+    - @boxes.next?
+      li.next
+        a href==url(:boxes, :list, :page => @boxes.next.number) "→" 

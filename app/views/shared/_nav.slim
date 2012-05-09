@@ -1,0 +1,12 @@
+- if current_account
+  li 
+    a href==url(:accounts, :edit) Edit Profile
+  li 
+    a href==url(:sessions, :destroy) Sign Out    
+  li 
+    a href==url(:boxes, :my_files) My Files     
+- else
+  li
+    a href==url(:sessions, :new) Sign In
+  li 
+    a href==url(:accounts, :new) Register
